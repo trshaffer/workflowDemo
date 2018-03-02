@@ -1,0 +1,17 @@
+{
+    # define taxon, taxon_csv, model_scenario,
+    # and projection_scenarios on the command line before this
+
+    "MAXENT": "apps/maxent.jar",
+    "PROCESS_POINTS": "tools/process_points.py",
+
+    "OUTPUT_DIR": format("outputs/%s", taxon),
+    "OUTPUT_TOUCH": format("outputs/%s/touch.out", taxon),
+    "OUTPUT_CSV": format("outputs/%s/%s.csv", taxon, taxon),
+    "MODEL_DIR": format("outputs/%s/model", taxon),
+    "MODEL_TOUCH": format("outputs/%s/touch.out", taxon),
+    "RULESET": format("outputs/%s/model/%s.lambdas", taxon, taxon),
+    "PROJECT_DIR": format("outputs/%s/proj_%%s", taxon),
+    "PROJECT_TOUCH": format("outputs/%s/proj_%%s/touch.out", taxon),
+    "PROJECT_OUT": format("outputs/%s/proj_%%s/%s_%%s.asc", taxon, taxon),
+}

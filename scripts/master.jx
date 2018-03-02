@@ -1,0 +1,16 @@
+{
+    "rules": [
+        {
+            "command": format(
+                "makeflow --jx-define taxon=%s --jx-define taxon_csv=%s --jx_define model_scenario=%s --jx-define projection_scenarios=%s --jx-args taxon_args.jx taxon.jx; touch %s",
+                t,
+                format(TAXON_CSV, t),
+                model_scenario,
+                shellquote(projection_scenarios),
+                format(TAXON_TOUCH, t)
+            ),
+            "outputs": [format(TAXON_TOUCH, t)],
+            "local_job": true,
+        } for t in taxa,
+    ],
+}
