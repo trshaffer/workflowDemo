@@ -4,29 +4,27 @@
             "command": format(
                 "mkdir -p %s ; touch %s",
                 OUTPUT_DIR,
-                OUTPUT_TOUCH)
+                OUTPUT_TOUCH
             ),
             "outputs": [OUTPUT_TOUCH],
-        },
-        {
+        }, {
             "command": format(
                 "python %s %s %s",
                 PROCESS_POINTS,
                 taxon_csv,
                 OUTPUT_CSV
-            )
-            "outputs": [OUTPUT_CSV]
-            "inputs": [csv, OUTPUT_TOUCH, PROCESS_POINTS]
-        },
+            ),
+            "outputs": [OUTPUT_CSV],
+            "inputs": [taxon_csv, OUTPUT_TOUCH, PROCESS_POINTS],
+        }, {
             "command": format(
                 "mkdir -p %s ; touch %s",
                 MODEL_DIR,
-                MODEL_TOUCH)
+                MODEL_TOUCH
             ),
             "outputs": [MODEL_TOUCH],
             "inputs": [OUTPUT_TOUCH],
-        },
-        {
+        }, {
             "command": format(
                 "java -cp %s density.MaxEnt -s %s -e %s -o %s nowarnings nocache autorun -z",
                 MAXENT,
@@ -34,26 +32,25 @@
                 model_scenario,
                 MODEL_DIR
             ),
-            "inputs": [MAXENT, MODEL_TOUCH, OUTPUT_CSV)],
+            "inputs": [MAXENT, MODEL_TOUCH, OUTPUT_CSV],
             "outputs": [RULESET],
-        },
-        {
+        }, {
             "command": format(
                 "mkdir -p %s ; touch %s",
-                format(PROJ_DIR, basename(p)),
-                format(PROJ_TOUCH, basename(p))
+                format(PROJECT_DIR, basename(p)),
+                format(PROJECT_TOUCH, basename(p))
             ),
-            "outputs": [format(PROJ_TOUCH, basename(p))],
-        } for p in projection_scenarios,
-        {
+            "outputs": [format(PROJECT_TOUCH, basename(p))],
+        } for p in projection_scenarios, {
             "command": format(
                 "java -cp %s density.Project %s %s %s nowarnings nocache autorun -z",
+                MAXENT,
                 RULESET,
                 p,
                 format(PROJECT_OUT, basename(p), basename(p))
             ),
             "outputs": [format(PROJECT_OUT, basename(p), basename(p))],
-            "inputs": [MAXENT, RULESET, format(PROJ_TOUCH, basename(p))],
+            "inputs": [MAXENT, RULESET, format(PROJECT_TOUCH, basename(p))],
         } for p in projection_scenarios,
     ],
 }

@@ -2,11 +2,12 @@
     "rules": [
         {
             "command": format(
-                "makeflow --jx-define taxon=%s --jx-define taxon_csv=%s --jx_define model_scenario=%s --jx-define projection_scenarios=%s --jx-args taxon_args.jx taxon.jx; touch %s",
-                t,
-                format(TAXON_CSV, t),
-                model_scenario,
-                shellquote(projection_scenarios),
+                "makeflow --jx-define 'taxon=%s' --jx-define 'taxon_csv=%s' --jx-define 'model_scenario=%s' --jx-define 'projection_scenarios=%s' --jx-args scripts/taxon_args.jx scripts/taxon.jx; mkdir -p %s;  touch %s",
+                escape(t),
+                escape(format(TAXON_CSV, t)),
+                escape(model_scenario),
+                projection_scenarios,
+                dirname(format(TAXON_TOUCH, t)),
                 format(TAXON_TOUCH, t)
             ),
             "outputs": [format(TAXON_TOUCH, t)],

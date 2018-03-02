@@ -9,7 +9,7 @@
     "OUTPUT_TOUCH": format("outputs/%s/touch.out", taxon),
     "OUTPUT_CSV": format("outputs/%s/%s.csv", taxon, taxon),
     "MODEL_DIR": format("outputs/%s/model", taxon),
-    "MODEL_TOUCH": format("outputs/%s/touch.out", taxon),
+    "MODEL_TOUCH": format("outputs/%s/model/touch.out", taxon),
     "RULESET": format("outputs/%s/model/%s.lambdas", taxon, taxon),
     "PROJECT_DIR": format("outputs/%s/proj_%%s", taxon),
     "PROJECT_TOUCH": format("outputs/%s/proj_%%s/touch.out", taxon),
