@@ -1,6 +1,5 @@
 #!/bin/sh
 
-# pass in the arguments for this run, e.g.
-#     --jx-args makeflows/chunk0.json
+# lazy option parsing: $1 must be JSON args
 
-makeflow --jx-args makeflows/master_args.jx makeflows/master.jx "$@"
+makeflow --makeflow-log "$1.makeflowlog" --jx-args makeflows/master_args.jx makeflows/master.jx --jx-args "$@"
