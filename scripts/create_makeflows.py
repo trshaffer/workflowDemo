@@ -17,12 +17,12 @@ POINTS_THRESHOLD = 30 # The threshold at which to compute models
 
 def write_chunk(chunk, chunkNo, mdlScn, prjScns):
     taxa = []
-    for taxon in chunk:
-        taxa.append(taxon[0][0])
-        taxonCsvFn = os.path.join(RAW_POINTS_DIR, '{}.csv'.format(taxa[-1]))
+    for _, (taxon, lines) in chunk:
+        taxa.append(taxon)
+        taxonCsvFn = os.path.join(RAW_POINTS_DIR, '{}.csv'.format(taxon))
         with open(taxonCsvFn, 'w') as outF:
-            for tl in taxon:
-                outF.write(tl)
+            for tl in lines:
+                outF.write(','.join(tl) + '\n')
     chunkFn = os.path.join(os.path.join(MAKEFLOW_DIR,
         'chunk{}.json'.format(chunkNo)))
     with open(chunkFn, 'w') as f:
@@ -40,13 +40,12 @@ def generate_makeflows(pointsCsv, mdlScn, prjScns, numPerGroup=100):
 
     # Loop through points csv and split into individual files
     with open(pointsCsv) as inF:
-        lines = (x.split(',') for x in inF)
+        lines = ([x.strip() for x in y.split(',')] for y in inF)
         taxa = itertools.groupby(lines, lambda x: x[0])
-        good_taxa = (x for x in taxa if len(x) >= POINTS_THRESHOLD)
-        chunks = itertools.groupby(enumerate(good_taxa),
+        chunks = itertools.groupby(enumerate(taxa),
                 lambda x: x[0] // numPerGroup)
         for c in chunks:
-            write_chunk(c[1], c[0] // numPerGroup, mdlScn, prjScns)
+            write_chunk(c[1], c[0], mdlScn, prjScns)
 
 # .............................................................................
 if __name__ == '__main__':
