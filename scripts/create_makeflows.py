@@ -18,6 +18,9 @@ POINTS_THRESHOLD = 30 # The threshold at which to compute models
 def write_chunk(chunk, chunkNo, mdlScn, prjScns):
     taxa = []
     for _, (taxon, lines) in chunk:
+        lines = list(lines)
+        if len(lines) < POINTS_THRESHOLD:
+            continue
         taxa.append(taxon)
         taxonCsvFn = os.path.join(RAW_POINTS_DIR, '{}.csv'.format(taxon))
         with open(taxonCsvFn, 'w') as outF:
