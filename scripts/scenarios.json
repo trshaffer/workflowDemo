@@ -1,4 +1,0 @@
-{
-    "model_scenario": "data/layers/worldclim",
-    "projection_scenarios": ["data/layers/worldclim"]
-}

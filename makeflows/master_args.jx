@@ -1,6 +1,4 @@
 {
-    # define taxa, model_scenario, and projection_scenarios first
-
     "TAXON_CSV": "raw_points/%s.csv",
     "TAXON_TOUCH": "touch/%s.touch",
 }

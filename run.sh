@@ -1,3 +1,6 @@
 #!/bin/sh
 
-makeflow --jx-args raw_points/index.json --jx-define 'scenarios="scripts/scenarios.json"' --jx-args scripts/master_args.jx scripts/master.jx
+# pass in the arguments for this run, e.g.
+#     --jx-args makeflows/chunk0.json
+
+makeflow --jx-args makeflows/master_args.jx makeflows/master.jx "$@"
