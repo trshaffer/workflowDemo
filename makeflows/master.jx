@@ -2,7 +2,7 @@
     "rules": [
         {
             "command": format(
-                "makeflow -T wq -N lifemapper_test --makeflow-log %s --jx-define 'taxon=%s' --jx-define 'taxon_csv=%s' --jx-args %s --jx-args makeflows/taxon_args.jx makeflows/taxon.jx; mkdir -p %s;  touch %s",
+                "/scratch365/tshaffe1/cctools/makeflow/src/makeflow -T condor -B 'has_scratch365 = true' --makeflow-log %s --jx-define 'taxon=%s' --jx-define 'taxon_csv=%s' --jx-args %s --jx-args makeflows/taxon_args.jx makeflows/taxon.jx; mkdir -p %s;  touch %s",
                 escape(format("makeflows/%s.makeflowlog", t)),
                 escape(t),
                 escape(format(TAXON_CSV, t)),
