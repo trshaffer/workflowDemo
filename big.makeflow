@@ -1,48 +1,48 @@
 makeflows/chunk0.json.makeflowlog: makeflows/chunk0.json
-	./run.sh makeflows/chunk0.json
+	/scratch365/tshaffe1/workflowDemo/run.sh makeflows/chunk0.json
 makeflows/chunk10.json.makeflowlog: makeflows/chunk10.json
-	./run.sh makeflows/chunk10.json
+	/scratch365/tshaffe1/workflowDemo/run.sh makeflows/chunk10.json
 makeflows/chunk11.json.makeflowlog: makeflows/chunk11.json
-	./run.sh makeflows/chunk11.json
+	/scratch365/tshaffe1/workflowDemo/run.sh makeflows/chunk11.json
 makeflows/chunk12.json.makeflowlog: makeflows/chunk12.json
-	./run.sh makeflows/chunk12.json
+	/scratch365/tshaffe1/workflowDemo/run.sh makeflows/chunk12.json
 makeflows/chunk13.json.makeflowlog: makeflows/chunk13.json
-	./run.sh makeflows/chunk13.json
+	/scratch365/tshaffe1/workflowDemo/run.sh makeflows/chunk13.json
 makeflows/chunk14.json.makeflowlog: makeflows/chunk14.json
-	./run.sh makeflows/chunk14.json
+	/scratch365/tshaffe1/workflowDemo/run.sh makeflows/chunk14.json
 makeflows/chunk15.json.makeflowlog: makeflows/chunk15.json
-	./run.sh makeflows/chunk15.json
+	/scratch365/tshaffe1/workflowDemo/run.sh makeflows/chunk15.json
 makeflows/chunk16.json.makeflowlog: makeflows/chunk16.json
-	./run.sh makeflows/chunk16.json
+	/scratch365/tshaffe1/workflowDemo/run.sh makeflows/chunk16.json
 makeflows/chunk17.json.makeflowlog: makeflows/chunk17.json
-	./run.sh makeflows/chunk17.json
+	/scratch365/tshaffe1/workflowDemo/run.sh makeflows/chunk17.json
 makeflows/chunk18.json.makeflowlog: makeflows/chunk18.json
-	./run.sh makeflows/chunk18.json
+	/scratch365/tshaffe1/workflowDemo/run.sh makeflows/chunk18.json
 makeflows/chunk19.json.makeflowlog: makeflows/chunk19.json
-	./run.sh makeflows/chunk19.json
+	/scratch365/tshaffe1/workflowDemo/run.sh makeflows/chunk19.json
 makeflows/chunk1.json.makeflowlog: makeflows/chunk1.json
-	./run.sh makeflows/chunk1.json
+	/scratch365/tshaffe1/workflowDemo/run.sh makeflows/chunk1.json
 makeflows/chunk20.json.makeflowlog: makeflows/chunk20.json
-	./run.sh makeflows/chunk20.json
+	/scratch365/tshaffe1/workflowDemo/run.sh makeflows/chunk20.json
 makeflows/chunk21.json.makeflowlog: makeflows/chunk21.json
-	./run.sh makeflows/chunk21.json
+	/scratch365/tshaffe1/workflowDemo/run.sh makeflows/chunk21.json
 makeflows/chunk22.json.makeflowlog: makeflows/chunk22.json
-	./run.sh makeflows/chunk22.json
+	/scratch365/tshaffe1/workflowDemo/run.sh makeflows/chunk22.json
 makeflows/chunk23.json.makeflowlog: makeflows/chunk23.json
-	./run.sh makeflows/chunk23.json
+	/scratch365/tshaffe1/workflowDemo/run.sh makeflows/chunk23.json
 makeflows/chunk2.json.makeflowlog: makeflows/chunk2.json
-	./run.sh makeflows/chunk2.json
+	/scratch365/tshaffe1/workflowDemo/run.sh makeflows/chunk2.json
 makeflows/chunk3.json.makeflowlog: makeflows/chunk3.json
-	./run.sh makeflows/chunk3.json
+	/scratch365/tshaffe1/workflowDemo/run.sh makeflows/chunk3.json
 makeflows/chunk4.json.makeflowlog: makeflows/chunk4.json
-	./run.sh makeflows/chunk4.json
+	/scratch365/tshaffe1/workflowDemo/run.sh makeflows/chunk4.json
 makeflows/chunk5.json.makeflowlog: makeflows/chunk5.json
-	./run.sh makeflows/chunk5.json
+	/scratch365/tshaffe1/workflowDemo/run.sh makeflows/chunk5.json
 makeflows/chunk6.json.makeflowlog: makeflows/chunk6.json
-	./run.sh makeflows/chunk6.json
+	/scratch365/tshaffe1/workflowDemo/run.sh makeflows/chunk6.json
 makeflows/chunk7.json.makeflowlog: makeflows/chunk7.json
-	./run.sh makeflows/chunk7.json
+	/scratch365/tshaffe1/workflowDemo/run.sh makeflows/chunk7.json
 makeflows/chunk8.json.makeflowlog: makeflows/chunk8.json
-	./run.sh makeflows/chunk8.json
+	/scratch365/tshaffe1/workflowDemo/run.sh makeflows/chunk8.json
 makeflows/chunk9.json.makeflowlog: makeflows/chunk9.json
-	./run.sh makeflows/chunk9.json
+	/scratch365/tshaffe1/workflowDemo/run.sh makeflows/chunk9.json
