@@ -1,0 +1,61 @@
+{
+    "rules": [
+        # directory setup
+        {
+            "command": format("mkdir -p outputs/%s", t),
+            "outputs": [format("outputs/%s", t)],
+        } for t in taxa, {
+            "command": format("mkdir -p outputs/%s/model", t),
+            "outputs": [format("outputs/%s/model", t)],
+        } for t in taxa, {
+            "command": format("mkdir -p outputs/%s/proj_%s", t, basename(p)),
+            "outputs": [format("outputs/%s/proj_%s", t, basename(p))],
+        } for t in taxa for p in projections,
+
+
+        # initial processing
+        {
+            "command": format(
+                "python %s raw_points/%s.csv outputs/%s/%s.csv",
+                PROCESS_POINTS, t, t, t
+            ),
+            "outputs": [format("outputs/%s/%s.csv", t, t)],
+            "inputs": [
+                format("raw_points/%s.csv", t),
+                format("outputs/%s", t),
+                PROCESS_POINTS
+            ],
+        } for t in taxa,
+
+
+        # maxent
+        {
+            "command": format(
+                "java -cp %s density.MaxEnt -s outputs/%s/%s.csv -e %s -o outputs/%s/model nowarnings nocache autorun -z",
+                MAXENT, t, t, model, t
+            ),
+            "inputs": [
+                MAXENT,
+                model,
+                format("outputs/%s/model", t),
+                format("outputs/%s/%s.csv", t, t)
+            ],
+            "outputs": [format("outputs/%s/model/%s.lambdas", t, t)],
+        } for t in taxa, {
+            "command": format(
+                "java -cp %s density.Project outputs/%s/model/%s.lambdas %s outputs/%s/proj_%s/%s_%s.asc nowarnings nocache autorun -z",
+                MAXENT, t, t, p, t, basename(p), t, basename(p)
+            ),
+            "outputs": [
+                format(
+                    "outputs/%s/proj_%s/%s_%s.asc",
+                    t, basename(p), t, basename(p)
+                )
+            ],
+            "inputs": [
+                MAXENT,
+                format("outputs/%s/model/%s.lambdas", t, t),
+                format("outputs/%s/proj_%s", t, basename(p))],
+        } for t in taxa for p in projections,
+    ],
+}

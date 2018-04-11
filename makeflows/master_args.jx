@@ -1,4 +1,0 @@
-{
-    "TAXON_CSV": "raw_points/%s.csv",
-    "TAXON_TOUCH": "touch/%s.touch",
-}

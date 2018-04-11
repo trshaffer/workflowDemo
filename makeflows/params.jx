@@ -1,0 +1,8 @@
+{
+#   "taxa": ["foo"],
+#   "projections": ["bar"],
+#   "model": "baz",
+
+    "MAXENT": "apps/maxent.jar",
+    "PROCESS_POINTS": "tools/process_points.py",
+}

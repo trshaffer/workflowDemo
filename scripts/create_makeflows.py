@@ -32,8 +32,8 @@ def write_chunk(chunk, chunkNo, mdlScn, prjScns):
         json.dump({
             'taxa': taxa,
             'args': chunkFn,
-            'model_scenario': mdlScn,
-            'projection_scenarios': prjScns,
+            'model': mdlScn,
+            'projections': prjScns,
         }, f)
 
 # .............................................................................

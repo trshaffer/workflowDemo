@@ -15,7 +15,7 @@ projection scenario.
 This dataset is small enough that it all runs in one master Makeflow.
 To run it, make sure Makeflow is in your `$PATH` and run
 
-    ./run.sh makeflows/chunk0.json
+    makeflow --jx-context makeflows/params.jx --jx-context makeflows/chunk0.json makeflows/taxa.jx
 
 ## Larger Example
 
@@ -27,3 +27,4 @@ and three projection scenarios each
 Since there are more data points, the generated workflow is split into
 several parts.
 Each one is run separately, just as in the small example.
+If you like, you could use a master Makeflow to launch each piece.
