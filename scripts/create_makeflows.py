@@ -37,7 +37,7 @@ def write_chunk(chunk, chunkNo, mdlScn, prjScns):
         }, f)
 
 # .............................................................................
-def generate_makeflows(pointsCsv, mdlScn, prjScns, numPerGroup=100):
+def generate_makeflows(pointsCsv, mdlScn, prjScns, numPerGroup):
     """
     @summary: Generate makeflows
     """
@@ -47,7 +47,7 @@ def generate_makeflows(pointsCsv, mdlScn, prjScns, numPerGroup=100):
         lines = ([x.strip() for x in y.split(',')] for y in inF)
         taxa = itertools.groupby(lines, lambda x: x[0])
         chunks = itertools.groupby(enumerate(taxa),
-                lambda x: x[0] // numPerGroup)
+                lambda x: x[0] // numPerGroup if numPerGroup else 0)
         for c in chunks:
             write_chunk(c[1], c[0], mdlScn, prjScns)
 
@@ -57,7 +57,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(
             'This script generates makeflows to process the input data')
 
-    parser.add_argument('-g', type=int, default=100,
+    parser.add_argument('--split', type=int,
             help='How many makeflows should be included in each group')
 
     parser.add_argument('points_csv', type=str,
@@ -70,4 +70,4 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     generate_makeflows(args.points_csv, args.model_scenario,
-            args.proj_scenario, numPerGroup=args.g)
+            args.proj_scenario, args.split)

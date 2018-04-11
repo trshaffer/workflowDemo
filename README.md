@@ -24,7 +24,8 @@ and three projection scenarios each
 
     python scripts/create_makeflows.py data/points/saxifragales.csv data/layers/worldclim data/layers/worldclim data/layers/mid data/layers/lgm
 
-Since there are more data points, the generated workflow is split into
+Since there are more data points, the generated workflow can be split into
 several parts.
+Use the `--split` option to specify the maximum number of taxa to put in each chunk.
 Each one is run separately, just as in the small example.
 If you like, you could use a master Makeflow to launch each piece.
