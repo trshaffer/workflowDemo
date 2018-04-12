@@ -28,4 +28,9 @@ Since there are more data points, the generated workflow can be split into
 several parts.
 Use the `--split` option to specify the maximum number of taxa to put in each chunk.
 Each one is run separately, just as in the small example.
-If you like, you could use a master Makeflow to launch each piece.
+A Makeflow to run all the chunks is generated at `makeflows/master.json`.
+Since we're running recursive invocations of Makeflow,
+we need to put each chunk in a sandbox.
+To run the master workflow, do
+
+    makeflow --sandbox --json makeflows/master.json
