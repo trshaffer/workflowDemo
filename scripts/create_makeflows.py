@@ -12,10 +12,11 @@ import os
 # .............................................................................
 MAKEFLOW_DIR = 'makeflows' # Directory to write makeflows
 RAW_POINTS_DIR = 'raw_points' # Directory to write raw point CSVs
+OUTPUT_DIR = 'outputs'
 POINTS_THRESHOLD = 30 # The threshold at which to compute models
 
 
-def write_chunk(chunk, chunkNo, mdlScn, prjScns):
+def write_chunk(chunk, chunkFn, mdlScn, prjScns):
     taxa = []
     for _, (taxon, lines) in chunk:
         lines = list(lines)
@@ -26,21 +27,26 @@ def write_chunk(chunk, chunkNo, mdlScn, prjScns):
         with open(taxonCsvFn, 'w') as outF:
             for tl in lines:
                 outF.write(','.join(tl) + '\n')
-    chunkFn = os.path.join(os.path.join(MAKEFLOW_DIR,
-        'chunk{}.json'.format(chunkNo)))
     with open(chunkFn, 'w') as f:
         json.dump({
             'taxa': taxa,
             'args': chunkFn,
             'model': mdlScn,
             'projections': prjScns,
-        }, f)
+        }, f, indent=4)
+    return taxa
 
 # .............................................................................
 def generate_makeflows(pointsCsv, mdlScn, prjScns, numPerGroup):
     """
     @summary: Generate makeflows
     """
+
+    proj = [os.path.basename(x.rstrip('/')) for x in prjScns]
+
+    master = {
+        "rules": []
+    }
 
     # Loop through points csv and split into individual files
     with open(pointsCsv) as inF:
@@ -49,7 +55,17 @@ def generate_makeflows(pointsCsv, mdlScn, prjScns, numPerGroup):
         chunks = itertools.groupby(enumerate(taxa),
                 lambda x: x[0] // numPerGroup if numPerGroup else 0)
         for c in chunks:
-            write_chunk(c[1], c[0], mdlScn, prjScns)
+            chunkFn = os.path.join(os.path.join(MAKEFLOW_DIR,
+                'chunk{}.json'.format(c[0])))
+            taxa = write_chunk(c[1], chunkFn, mdlScn, prjScns)
+            master['rules'].append({
+                "command": "makeflow --jx-context makeflows/params.jx --jx-context {} makeflows/taxa.jx".format(chunkFn, chunkFn),
+                "inputs": list(set([mdlScn] + prjScns)) + ['makeflows/params.jx', 'makeflows/taxa.jx', chunkFn, 'apps/', 'tools/'] + ['raw_points/{}.csv'.format(t) for t in taxa],
+                "outputs": list(set([os.path.join(OUTPUT_DIR, t, 'proj_' + p, '{}_{}.asc'.format(t, p)) for t in taxa for p in proj])),
+            })
+
+    with open(os.path.join(MAKEFLOW_DIR, 'master.json'), "w") as f:
+        json.dump(master, f, indent=4)
 
 # .............................................................................
 if __name__ == '__main__':
