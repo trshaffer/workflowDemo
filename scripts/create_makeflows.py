@@ -45,7 +45,16 @@ def generate_makeflows(pointsCsv, mdlScn, prjScns, numPerGroup):
     proj = [os.path.basename(x.rstrip('/')) for x in prjScns]
 
     master = {
-        "rules": []
+        "rules": [],
+        "categories": {
+            "default": {
+                "resources": {
+                    "cores": len(prjScns),
+                    "memory": 4096 * len(prjScns),
+                    "disk": 4096 * len(prjScns),
+                },
+            },
+        },
     }
 
     # Loop through points csv and split into individual files

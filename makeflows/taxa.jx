@@ -1,4 +1,13 @@
 {
+    "categories": {
+        "default": {
+            "resources": {
+                "cores": 1,
+                "memory": 4096,
+                "disk": 4096,
+            },
+        },
+    },
     "rules": [
         {
             "command": format(
