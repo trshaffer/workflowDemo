@@ -15,11 +15,12 @@
             ],
         } for t in taxa, {
             "command": format(
-                "mkdir -p outputs/%s/model && java -cp %s density.MaxEnt -s outputs/%s/%s.csv -e %s -o outputs/%s/model nowarnings nocache autorun -z",
-                t, MAXENT, t, t, model, t
+                "mkdir -p outputs/%s/model && %s -cp %s density.MaxEnt -s outputs/%s/%s.csv -e %s -o outputs/%s/model nowarnings nocache autorun -z",
+                t, JAVA, MAXENT, t, t, model, t
             ),
             "inputs": [
                 MAXENT,
+                JAVA,
                 model,
                 format("outputs/%s/%s.csv", t, t)
             ],
@@ -29,8 +30,8 @@
             ],
         } for t in taxa, {
             "command": format(
-                "mkdir -p outputs/%s/proj_%s && java -cp %s density.Project outputs/%s/model/%s.lambdas %s outputs/%s/proj_%s/%s_%s.asc nowarnings nocache autorun -z",
-                t, basename(p), MAXENT, t, t, p, t, basename(p), t, basename(p)
+                "mkdir -p outputs/%s/proj_%s && %s -cp %s density.Project outputs/%s/model/%s.lambdas %s outputs/%s/proj_%s/%s_%s.asc nowarnings nocache autorun -z",
+                t, basename(p), JAVA, MAXENT, t, t, p, t, basename(p), t, basename(p)
             ),
             "outputs": [
                 format("outputs/%s/proj_%s", t, basename(p)),
@@ -41,6 +42,7 @@
             ],
             "inputs": [
                 MAXENT,
+                JAVA,
                 model,
                 p,
                 format("outputs/%s/model/%s.lambdas", t, t),
