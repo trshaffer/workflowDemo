@@ -24,8 +24,8 @@
             ],
         } for t in taxa, {
             "command": format(
-                "mkdir -p outputs/%s/model && %s -cp %s density.MaxEnt -s outputs/%s/%s.csv -e %s -o outputs/%s/model nowarnings nocache autorun -z",
-                t, JAVA, MAXENT, t, t, model, t
+                "mkdir -p outputs/%s/model && %s -cp %s density.MaxEnt -s outputs/%s/%s.csv -e %s -o outputs/%s/model nowarnings nocache autorun -z && touch outputs/%s/model/%s.lambdas",
+                t, JAVA, MAXENT, t, t, model, t, t, t
             ),
             "inputs": [
                 MAXENT,
