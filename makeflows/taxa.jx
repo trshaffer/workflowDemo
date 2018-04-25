@@ -11,8 +11,8 @@
     "rules": [
         {
             "command": format(
-                "mkdir -p outputs/%s && python %s raw_points/%s.csv outputs/%s/%s.csv",
-                t, PROCESS_POINTS, t, t, t
+                "%s raw_points/%s.csv outputs/%s/%s.csv",
+                PRE_SCRIPT, t, t, t
             ),
             "outputs": [
                 format("outputs/%s/%s.csv", t, t),
@@ -20,14 +20,16 @@
             ],
             "inputs": [
                 format("raw_points/%s.csv", t),
-                PROCESS_POINTS
+                PRE_SCRIPT,
+                PROCESS_POINTS,
             ],
         } for t in taxa, {
             "command": format(
-                "mkdir -p outputs/%s/model && %s -cp %s density.MaxEnt -s outputs/%s/%s.csv -e %s -o outputs/%s/model nowarnings nocache autorun -z && touch outputs/%s/model/%s.lambdas",
-                t, JAVA, MAXENT, t, t, model, t, t, t
+                "%s outputs/%s/%s.csv %s outputs/%s/model outputs/%s/model/%s.lambdas",
+                MAXENT_SCRIPT, t, t, model, t, t, t
             ),
             "inputs": [
+                MAXENT_SCRIPT,
                 MAXENT,
                 JAVA,
                 model,
@@ -39,8 +41,8 @@
             ],
         } for t in taxa, {
             "command": format(
-                "mkdir -p outputs/%s/proj_%s && %s -cp %s density.Project outputs/%s/model/%s.lambdas %s outputs/%s/proj_%s/%s_%s.asc nowarnings nocache autorun -z",
-                t, basename(p), JAVA, MAXENT, t, t, p, t, basename(p), t, basename(p)
+                "%s outputs/%s/model/%s.lambdas %s outputs/%s/proj_%s/%s_%s.asc",
+                PROJECT_SCRIPT, t, t, p, t, basename(p), t, basename(p)
             ),
             "outputs": [
                 format("outputs/%s/proj_%s", t, basename(p)),
@@ -50,6 +52,7 @@
                 )
             ],
             "inputs": [
+                PROJECT_SCRIPT,
                 MAXENT,
                 JAVA,
                 model,

@@ -3,7 +3,10 @@
 #   "projections": ["bar"],
 #   "model": "baz",
 
-    "JAVA": "./tools/java8_run",
     "MAXENT": "apps/maxent.jar",
+    "JAVA": "tools/java8_run",
     "PROCESS_POINTS": "tools/process_points.py",
+    "PRE_SCRIPT": "./tools/pre.sh",
+    "PROJECT_SCRIPT": "./tools/project.sh",
+    "MAXENT_SCRIPT": "./tools/maxent.sh"
 }
