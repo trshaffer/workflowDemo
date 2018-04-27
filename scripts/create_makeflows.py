@@ -68,10 +68,10 @@ def generate_makeflows(pointsCsv, mdlScn, prjScns, numPerGroup):
                 'chunk{}.json'.format(c[0])))
             taxa = write_chunk(c[1], chunkFn, mdlScn, prjScns)
             master['rules'].append({
-                "command": "makeflow -l {}.makeflowlog -L {}.batchlog --jx-context makeflows/params.jx --jx-context {} makeflows/taxa.jx && touch {}.makeflowlog && touch {}.batchlog".format(chunkFn, chunkFn, chunkFn, chunkFn, chunkFn, chunkFn),
+                "command": "makeflow -l {}.makeflowlog --jx-context makeflows/params.jx --jx-context {} makeflows/taxa.jx && touch {}.makeflowlog && touch {}.batchlog".format(chunkFn, chunkFn, chunkFn, chunkFn, chunkFn),
                 "inputs": list(set([mdlScn] + prjScns)) + ['makeflows/params.jx', 'makeflows/taxa.jx', chunkFn, 'apps/', 'tools/'] + ['raw_points/{}.csv'.format(t) for t in taxa],
                 "outputs": list(set([os.path.join(OUTPUT_DIR, t, 'proj_' + p, '{}_{}.asc'.format(t, p)) for t in taxa for p in proj]))
-                    + ["{}.makeflowlog".format(chunkFn), "{}.batchlog".format(chunkFn)],
+                    + ["{}.makeflowlog".format(chunkFn), "{}.wqlog".format(chunkFn), "{}.wqlog.tr".format(chunkFn)],
             })
 
     with open(os.path.join(MAKEFLOW_DIR, 'master.json'), "w") as f:
