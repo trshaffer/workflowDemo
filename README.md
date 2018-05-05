@@ -22,7 +22,7 @@ To run it, make sure Makeflow is in your `$PATH` and run
 This example runs on the Saxifragales dataset (larger) with a model scenario
 and three projection scenarios each
 
-    python scripts/create_makeflows.py data/points/saxifragales.csv data/layers/worldclim data/layers/worldclim data/layers/mid data/layers/lgm
+    python scripts/create_makeflows.py data/points/saxifragales.csv data/layers/worldclim data/layers/*
 
 Since there are more data points, the generated workflow can be split into
 several parts.
@@ -34,3 +34,13 @@ we need to put each chunk in a sandbox.
 To run the master workflow, do
 
     makeflow --sandbox --json makeflows/master.json
+
+## Even Larger
+
+The `dup.sh` script can duplicate layers under different filenames to increase
+the scale of the workflow without actually using new data. To make four
+duplicates of the layers (for a total of five of each), run
+
+    ./dup.sh data/layers/ 4
+
+You'll need to run the Python line from the Large example.
