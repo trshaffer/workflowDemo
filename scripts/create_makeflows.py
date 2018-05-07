@@ -69,7 +69,7 @@ def generate_makeflows(pointsCsv, mdlScn, prjScns, numPerGroup):
             taxa = write_chunk(c[1], chunkFn, mdlScn, prjScns)
             log_files = ["{}.debug".format(chunkFn), "{}.makeflowlog".format(chunkFn), "{}.wqlog".format(chunkFn), "{}.wqlog.tr".format(chunkFn)]
             master['rules'].append({
-                "command": "makeflow -dall -o {}.debug -l {}.makeflowlog -L {}.wqlog --jx-context makeflows/params.jx --jx-context {} makeflows/taxa.jx ".format(chunkFn, chunkFn, chunkFn, chunkFn, chunkFn) + ' '.join(["&& touch {}".format(x) for x in log_files]),
+                "command": "./apps/makeflow -dall -o {}.debug -l {}.makeflowlog -L {}.wqlog --jx-context makeflows/params.jx --jx-context {} makeflows/taxa.jx ".format(chunkFn, chunkFn, chunkFn, chunkFn, chunkFn) + ' '.join(["&& touch {}".format(x) for x in log_files]),
                 "inputs": list(set([mdlScn] + prjScns)) + ['makeflows/params.jx', 'makeflows/taxa.jx', chunkFn, 'apps/', 'tools/'] + ['raw_points/{}.csv'.format(t) for t in taxa],
                 "outputs": list(set([os.path.join(OUTPUT_DIR, t, 'proj_' + p, '{}_{}.asc'.format(t, p)) for t in taxa for p in proj]))
                     + log_files,
