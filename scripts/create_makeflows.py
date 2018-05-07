@@ -49,9 +49,9 @@ def generate_makeflows(pointsCsv, mdlScn, prjScns, numPerGroup):
         "categories": {
             "default": {
                 "resources": {
-                    "cores": len(prjScns),
-                    "memory": 4096 * len(prjScns),
-                    "disk": 4096 * len(prjScns),
+                    "cores": 12,
+                    "memory": 20000,
+                    "disk": 40000,
                 },
             },
         },
