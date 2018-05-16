@@ -9,7 +9,7 @@ for a in $(ls "$1"); do
       for c in $(seq "$2"); do
         TARGET="../$a.$c/$b"
         mkdir -p $(dirname "$TARGET")
-	ln "$b" "$TARGET"
+	cp "$b" "$TARGET"
       done
     done
   )
