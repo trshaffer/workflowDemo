@@ -73,6 +73,8 @@ def generate_makeflows(pointsCsv, mdlScn, prjScns, numPerGroup):
             chunkFn = os.path.join(os.path.join(MAKEFLOW_DIR,
                 'chunk{}.json'.format(c[0])))
             taxa = write_chunk(c[1], chunkFn, mdlScn, prjScns)
+            if len(taxa) == 0:
+                continue
             log_files = ["{}.debug".format(chunkFn), "{}.makeflowlog".format(chunkFn), "{}.wqlog".format(chunkFn), "{}.wqlog.tr".format(chunkFn)]
             master['rules'].append({
                 "command": "./apps/makeflow -dall -o {}.debug $RUN_OPTS -l {}.makeflowlog -L {}.wqlog --jx-context makeflows/params.jx --jx-context {} makeflows/taxa.jx ".format(chunkFn, chunkFn, chunkFn, chunkFn, chunkFn) + ' '.join(["&& touch {}".format(x) for x in log_files]),
