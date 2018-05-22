@@ -45,13 +45,7 @@ def generate_makeflows(pointsCsv, mdlScn, prjScns, numPerGroup):
     proj = [os.path.basename(x.rstrip('/')) for x in prjScns]
 
     master = {
-        "rules": [
-            {
-                "command": "sleep 300 && date +%s.%N>start.time",
-                "outputs": ["start.time"],
-                "local_job": True,
-            }
-        ],
+        "rules": [],
         "categories": {
             "default": {
                 "resources": {
@@ -78,7 +72,7 @@ def generate_makeflows(pointsCsv, mdlScn, prjScns, numPerGroup):
             log_files = ["{}.debug".format(chunkFn), "{}.makeflowlog".format(chunkFn), "{}.wqlog".format(chunkFn), "{}.wqlog.tr".format(chunkFn)]
             master['rules'].append({
                 "command": "./apps/makeflow -dall -o {}.debug $RUN_OPTS -l {}.makeflowlog -L {}.wqlog --jx-context makeflows/params.jx --jx-context {} makeflows/taxa.jx ".format(chunkFn, chunkFn, chunkFn, chunkFn, chunkFn) + ' '.join(["&& touch {}".format(x) for x in log_files]),
-                "inputs": list(set([mdlScn] + prjScns)) + ['start.time', 'makeflows/params.jx', 'makeflows/taxa.jx', chunkFn, 'apps/', 'tools/'] + ['raw_points/{}.csv'.format(t) for t in taxa],
+                "inputs": list(set([mdlScn] + prjScns)) + ['makeflows/params.jx', 'makeflows/taxa.jx', chunkFn, 'apps/', 'tools/'] + ['raw_points/{}.csv'.format(t) for t in taxa],
                 "outputs": list(set([os.path.join(OUTPUT_DIR, t, 'proj_' + p, '{}_{}.asc'.format(t, p)) for t in taxa for p in proj]))
                     + log_files,
             })
