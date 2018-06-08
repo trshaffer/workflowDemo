@@ -1,4 +1,4 @@
-# workflowDemo
+# Lifemapper
 
 This version of the Lifemapper Makeflow generator splits a single csv file 
 containing multiple taxa but grouped so that like taxa are adjacent to each
